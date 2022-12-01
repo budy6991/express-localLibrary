@@ -31,7 +31,7 @@ AuthorSchema.virtual("lifespan").get(function () {
         DateTime.DATE_MED
       ) +
         " - " +
-        DateTime.fromJSDate(this.date_of_birth).toLocaleString(
+        DateTime.fromJSDate(this.date_of_death).toLocaleString(
           DateTime.DATE_MED
         )
     : "N/A";
