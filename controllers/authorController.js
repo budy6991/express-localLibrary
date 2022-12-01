@@ -103,6 +103,7 @@ exports.author_delete_get = (req, res, next) => {
   async.parallel(
     {
       author(callback) {
+        console.log(req.params);
         Author.findById(req.params.id).exec(callback);
       },
       authors_books(callback) {

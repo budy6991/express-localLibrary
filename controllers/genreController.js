@@ -1,5 +1,7 @@
 const { body, validationResult } = require("express-validator");
 const Genre = require("../models/genre");
+const async = require("async");
+const Book = require("../models/book");
 
 // Display list of all Genre.
 exports.genre_list = (req, res) => {
@@ -17,8 +19,30 @@ exports.genre_list = (req, res) => {
 };
 
 // Display detail page for a specific Genre.
-exports.genre_detail = (req, res) => {
-  res.send(`NOT IMPLEMENTED: Genre detail: ${req.params.id}`);
+exports.genre_detail = (req, res, next) => {
+  async.parallel(
+    {
+      genre(callback) {
+        Genre.findById(req.params.id).exec(callback);
+      },
+      genres_books(callback) {
+        Book.find({ genre: req.params.id }).exec(callback);
+      },
+    },
+    (err, results) => {
+      if (err) {
+        return next(err);
+      }
+      if (results.genre == null) {
+        res.redirect("/catalog/genres");
+      }
+      res.render("genre_detail", {
+        title: results.genre.name,
+        genre: results.genre,
+        genre_books: results.genre_books,
+      });
+    }
+  );
 };
 
 // Display Genre create form on GET.
@@ -62,8 +86,31 @@ exports.genre_create_post = [
 ];
 
 // Display Genre delete form on GET.
-exports.genre_delete_get = (req, res) => {
-  res.send("NOT IMPLEMENTED: Genre delete GET");
+exports.genre_delete_get = (req, res, next) => {
+  async.parallel(
+    {
+      genre(callback) {
+        Genre.findById(req.params.id).exec(callback);
+      },
+      genre_books(callback) {
+        Book.find({ genre: req.params.id }).exec(callback);
+      },
+    },
+    (err, results) => {
+      if (err) {
+        return next(err);
+      }
+      if (results.genre === null) {
+        res.redirect("/catalog/genres");
+      }
+      console.log(results.genre_books);
+      res.render("genre_delete", {
+        title: "Delete Genre",
+        genre: results.genre,
+        genre_books: results.genre_books,
+      });
+    }
+  );
 };
 
 // Handle Genre delete on POST.
