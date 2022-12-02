@@ -199,7 +199,6 @@ exports.book_create_post = [
 
 // Display book delete form on GET.
 exports.book_delete_get = (req, res, next) => {
-  console.log(req.params);
   async.parallel(
     {
       book(callback) {
