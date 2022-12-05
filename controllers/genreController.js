@@ -25,7 +25,7 @@ exports.genre_detail = (req, res, next) => {
       genre(callback) {
         Genre.findById(req.params.id).exec(callback);
       },
-      genres_books(callback) {
+      genre_books(callback) {
         Book.find({ genre: req.params.id }).exec(callback);
       },
     },
@@ -119,9 +119,7 @@ exports.genre_delete_post = (req, res) => {
 };
 
 // Display Genre update form on GET.
-exports.genre_update_get = (req, res) => {
-  res.send("NOT IMPLEMENTED: Genre update GET");
-};
+exports.genre_update_get = (req, res) => {};
 
 // Handle Genre update on POST.
 exports.genre_update_post = (req, res) => {
