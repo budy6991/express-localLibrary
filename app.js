@@ -1,5 +1,4 @@
-const dotenv = require("dotenv");
-dotenv.config();
+require("dotenv").config();
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
@@ -16,7 +15,9 @@ const helmet = require("helmet");
 var app = express();
 
 const mongoose = require("mongoose");
-const mongoDB = process.env.MONGO_DB_CONNECTION;
+
+const mongoDB = process.env.MONGODB_URI || process.env.dev_db_url;
+
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
