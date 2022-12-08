@@ -1,5 +1,4 @@
-const dotenv = require("dotenv");
-dotenv.config();
+require("dotenv").config({ path: "MONGO_DB_CONNECTION" });
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
@@ -19,7 +18,7 @@ const mongoose = require("mongoose");
 
 const mongoDB = process.env.MONGO_DB_CONNECTION;
 
-mongoose.connect(mongoDB.toString(), {
+mongoose.connect(mongoDB, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
