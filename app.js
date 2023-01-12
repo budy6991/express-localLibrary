@@ -1,4 +1,4 @@
-require("dotenv").config({ path: "MONGO_DB_CONNECTION" });
+require("dotenv").config({ path: "./.env" });
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
@@ -17,6 +17,7 @@ var app = express();
 const mongoose = require("mongoose");
 
 const mongoDB = process.env.MONGO_DB_CONNECTION;
+console.log(mongoDB);
 
 mongoose.connect(mongoDB, {
   useNewUrlParser: true,
