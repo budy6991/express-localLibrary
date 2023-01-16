@@ -2,7 +2,7 @@
 
 Local library project made with Express(Node), following the <a href='https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/deployment#in_this_module'>MDN tutorial for Express</a>
 
-You can have a look <a href='https://polished-bush-2851.fly.dev/catalog'>here</a> , deployed with Railway.
+You can have a look <a href='https://polished-bush-2851.fly.dev/catalog'>here</a> , deployed with Fly.
 
 <img src='./locallibrary.jpg'>
 
